@@ -1,0 +1,55 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["strictUndefinedChecks"]
+  output          = "../node_modules/@prisma-generated"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+//////////////
+// Accounts //
+//////////////
+
+model User {
+  id            String    @id @default(cuid(2))
+  email         String    @unique
+  emailVerified DateTime?
+
+  docs     Document[]
+  sessions Session[]
+}
+
+model Session {
+  id      String   @id
+  expires DateTime
+  userId  String
+  user    User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  email   String
+  token   String   @unique
+  expires DateTime
+
+  @@id([email, token])
+}
+
+///////////////
+// Documents //
+///////////////
+
+model Document {
+  id   String @id @default(cuid(2))
+  name String
+  text String
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
