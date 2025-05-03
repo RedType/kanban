@@ -11,15 +11,16 @@
   <h1>page name</h1>
   <form method="POST" action="?/login">
   {#if !data.session}
-      <input
-        type="email"
-        name="email"
-        placeholder="email@example.com"
-        required
-      />
-      <button type="submit">Log in</button>
+    <input
+      type="email"
+      name="email"
+      placeholder="email@example.com"
+      required
+    />
+    <button type="submit">Log in</button>
   {:else}
-      <button type="submit" formAction="?/logout">Log out</button>
+    <div>{data.user.email}</div>
+    <button type="submit" formAction="?/logout">Log out</button>
   {/if}
   </form>
 </header>

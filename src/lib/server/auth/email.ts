@@ -48,7 +48,7 @@ export const sendLoginEmail = async (to: string): Promise<Response> => {
   const event = getRequestEvent();
   const token = generateSecureToken();
   const origin = new URL(event.url.href).origin;
-  const url = `${origin}/login/${token}`;
+  const url = `${origin}/auth/${token}`;
 
   // create verification token
   await prisma.verificationToken.create({
