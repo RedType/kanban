@@ -1,28 +1,21 @@
 <script lang="ts">
   import '../app.css';
+  import { Floatification, Login, Logout } from '$/lib/components';
 
   let { children, data } = $props();
 </script>
 
 <header class="
-  flex justify-between items-centercontent-evenly
-  w-screen h-32 p-4 dark:bg-slate-50
+  flex justify-between items-center content-evenly
+  w-screen p-4
+  dark:text-white dark:bg-slate-500
 ">
-  <h1>page name</h1>
-  <form method="POST" action="?/login">
+  <h1 class="font-bold">page name</h1>
   {#if !data.session}
-    <input
-      type="email"
-      name="email"
-      placeholder="email@example.com"
-      required
-    />
-    <button type="submit">Log in</button>
+    <Login />
   {:else}
-    <div>{data.user.email}</div>
-    <button type="submit" formAction="?/logout">Log out</button>
+    <Logout email={data.user?.email ?? 'You'} />
   {/if}
-  </form>
 </header>
 
 {@render children()}

@@ -17,7 +17,7 @@ export const GET: RequestHandler = async (event) => {
 
   // create session
   const sessionToken = generateSecureToken();
-  const session = await createSession(sessionToken, user.email);
+  const session = await createSession(sessionToken, user.id);
 
   setSessionTokenCookie(sessionToken, session.expires);
 
