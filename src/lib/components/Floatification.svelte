@@ -31,7 +31,7 @@
 </script>
 
 <div class="
-  absolute w-screen top-0 left-0
+  absolute w-screen top-0 left-0 -z-100
   flex justify-center
 ">
   <div

@@ -18,8 +18,10 @@ model User {
   email         String    @unique
   emailVerified DateTime?
 
-  docs     Document[]
-  sessions Session[]
+  sessions       Session[]
+  ownedProjects  Project[]
+  memberProjects UsersToProjects[]
+  timeEntries    TimeEntry[]
 }
 
 model Session {
@@ -37,19 +39,43 @@ model VerificationToken {
   @@id([email, token])
 }
 
-///////////////
-// Documents //
-///////////////
+//////////////
+// Projects //
+//////////////
 
-model Document {
+model Project {
   id   String @id @default(cuid(2))
   name String
-  text String
 
-  userId String
-  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  ownerId String?
+  owner   User?   @relation(fields: [ownerId], references: [id], onDelete: SetNull)
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  members     UsersToProjects[]
+  timeEntries TimeEntry[]
+
+  created DateTime @default(now())
 }
 
+model UsersToProjects {
+  userId    String
+  user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  projectId String
+  project   Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  @@id([userId, projectId])
+}
+
+////////////////
+// Time Clock //
+////////////////
+
+model TimeEntry {
+  id     String   @id @default(cuid(2))
+  start  DateTime @default(now())
+  length Int      @default(0) // seconds
+
+  projectId String
+  project   Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  userId    String?
+  user      User?   @relation(fields: [userId], references: [id], onDelete: SetNull)
+}

@@ -7,7 +7,7 @@
   let openFloat = $state(false);
   let submitting = $state(false);
 
-  const submit: SubmitFunction = ({ cancel }) => {
+  const submit: SubmitFunction = () => {
     submitting = true;
 
     return async ({ result }) => {
@@ -41,7 +41,9 @@
       type="submit"
       class="
         relative p-1 pl-3 -left-2 rounded-r-md
-        dark:bg-fuchsia-800 dark:text-white
+        dark:bg-slate-500 dark:text-white
+        dark:hover:bg-slate-700
+        font-bold
       "
     >
       {#if submitting}
