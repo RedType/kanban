@@ -5,13 +5,9 @@
     open: boolean;
   }
 
-  let {
-    autoclose = true,
-    message,
-    open = $bindable(),
-  }: Props = $props();
+  let { autoclose = true, message, open = $bindable() }: Props = $props();
 
-  const topClass = $derived(open ? "top-0" : "-top-20");
+  const topClass = $derived(open ? 'top-0' : '-top-20');
 
   // autoclose timer
   const timeout = typeof autoclose === 'number' ? autoclose : 5000;
@@ -30,30 +26,36 @@
   });
 </script>
 
-<div class="
-  absolute w-screen top-0 left-0 -z-100
-  flex justify-center
-">
+<div
+  class="
+  absolute top-0 left-0 -z-100 flex
+  w-screen justify-center
+"
+>
   <div
     class={[
-      "relative z-100 m-2 p-2 min-w-100 rounded-md",
-      "flex items-center gap-2",
-      "bg-yellow-500 text-black",
-      "transition-all duration-500",
+      'relative z-100 m-2 min-w-100 rounded-md p-2',
+      'flex items-center gap-2',
+      'bg-yellow-500 text-black',
+      'transition-all duration-500',
       topClass,
     ].join(' ')}
   >
-    <div class="
-      w-[2.3rem] h-[2.3rem]
-      text-[2rem] font-bold font-serif italic
-      border border-5 rounded-full
-      flex justify-center items-center
-      border-blue-500 text-blue-500
-    ">i</div>
+    <div
+      class="
+      flex h-[2.3rem]
+      w-[2.3rem] items-center justify-center rounded-full
+      border border-5 border-blue-500
+      font-serif text-[2rem] font-bold
+      text-blue-500 italic
+    "
+    >
+      i
+    </div>
     <span>{message}</span>
     <button
-      onclick={() => open = false}
-      class="font-bold text-red-700 absolute right-2 top-0"
+      onclick={() => (open = false)}
+      class="absolute top-0 right-2 font-bold text-red-700"
     >
       x
     </button>

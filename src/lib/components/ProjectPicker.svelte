@@ -7,10 +7,7 @@
     selected: string;
   }
 
-  let {
-    projects,
-    selected = $bindable(''),
-  }: Props = $props();
+  let { projects, selected = $bindable('') }: Props = $props();
 
   onMount(() => {
     selected = localStorage.getItem('activeProject') ?? '';
@@ -25,7 +22,7 @@
     name="project"
     bind:value={selected}
     class="
-      w-50 h-10 p-2 bg-slate-200 rounded-l-md text-black
+      h-10 w-50 rounded-l-md bg-slate-200 p-2 text-black
     "
   >
     {#each projects as project (project.id)}
@@ -34,8 +31,10 @@
       </option>
     {/each}
   </select>
-  <button class="
-    bg-green-600 text-white font-bold text-3xl px-2 h-10
-    hover:bg-green-500 rounded-r-md
-  ">+</button>
+  <button
+    class="
+    h-10 rounded-r-md bg-green-600 px-2 text-3xl font-bold
+    text-white hover:bg-green-500
+  ">+</button
+  >
 </div>

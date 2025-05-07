@@ -11,9 +11,9 @@ export const load: LayoutServerLoad = async (event) => {
       id: fullUser.id,
       email: fullUser.email,
     };
-  };
+  }
 
-  let projects: Array<{ name: string, id: string }> = [];
+  let projects: Array<{ name: string; id: string }> = [];
   projects = [
     { id: '1', name: 'Project 1' },
     { id: '2', name: 'Project 2' },

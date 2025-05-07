@@ -5,16 +5,14 @@
     data: PageData;
   }
 
-  const {
-    data,
-  }: Props = $props();
+  const { data }: Props = $props();
 </script>
 
 <svelte:head>
   <title>Redtype Kanban</title>
 </svelte:head>
 
-<div class="w-full mt-10 text-white font-bold text-3xl flex justify-center">
+<div class="mt-10 flex w-full justify-center text-3xl font-bold text-white">
   {#if data.user}
     <p>Pick a project to get started</p>
   {:else}

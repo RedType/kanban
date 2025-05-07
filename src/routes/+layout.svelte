@@ -2,7 +2,8 @@
   import '../app.css';
   import {
     Hamburger,
-    Login, Logout,
+    Login,
+    Logout,
     ProjectPicker,
     Sidebar,
     SquishButton,
@@ -25,14 +26,16 @@
   const profileUrl = $derived(`/profile/${data.user?.id}`);
 </script>
 
-<header class="
-  flex justify-between items-center content-evenly
-  w-screen p-4
-  dark:text-white dark:bg-slate-600
-">
+<header
+  class="
+  flex w-screen content-evenly items-center
+  justify-between p-4
+  dark:bg-slate-600 dark:text-white
+"
+>
   <div class="flex items-center gap-3">
-    <Hamburger onclick={() => sidebarOpen = !sidebarOpen} />
-    <h1 class="font-bold text-xl">Redtype Kanban</h1>
+    <Hamburger onclick={() => (sidebarOpen = !sidebarOpen)} />
+    <h1 class="text-xl font-bold">Redtype Kanban</h1>
   </div>
 
   <div class="flex items-center gap-3">
@@ -45,7 +48,7 @@
   </div>
 </header>
 
-<div class="absolute flex w-full h-full">
+<div class="absolute flex h-full w-full">
   <Sidebar open={sidebarOpen} hide={!data.user || !activeProject}>
     {#if data.user && activeProject}
       <SquishButton href={projectUrl}>
@@ -70,7 +73,7 @@
     {/if}
   </Sidebar>
 
-  <div class="p-2 w-full h-full">
+  <div class="h-full w-full p-2">
     {@render children?.()}
   </div>
 </div>

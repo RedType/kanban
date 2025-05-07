@@ -2,22 +2,22 @@
   import type { MouseEventHandler } from 'svelte/elements';
 
   interface Props {
-    onclick: MouseEventHandler<HTMLButtonElement>,
+    onclick: MouseEventHandler<HTMLButtonElement>;
   }
 
-  let {
-    onclick,
-  }: Props = $props();
+  let { onclick }: Props = $props();
 </script>
 
 <button
   aria-label="Open/Close Sidebar"
-  onclick={onclick}
-  class="flex flex-col w-6 gap-1"
+  {onclick}
+  class="flex w-6 flex-col gap-1"
 >
   {#each Array(3) as _}
-    <div class="
-      bg-white w-full h-1 rounded-full
-    "></div>
+    <div
+      class="
+      h-1 w-full rounded-full bg-white
+    "
+    ></div>
   {/each}
 </button>

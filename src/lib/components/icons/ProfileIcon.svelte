@@ -1,4 +1,4 @@
-<div class="min-w-5 min-h-5">
+<div class="min-h-5 min-w-5">
   <svg
     version="1.1"
     viewBox="0 0 13.365 16.365"

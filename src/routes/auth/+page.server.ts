@@ -4,7 +4,7 @@ import { deleteSessionTokenCookie, sendLoginEmail } from '$/lib/server/auth';
 import type { Actions } from './$types';
 
 export const actions: Actions = {
-  login: async event => {
+  login: async (event) => {
     let email;
     try {
       const data = (await event.request.formData()).get('email');

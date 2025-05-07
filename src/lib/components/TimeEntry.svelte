@@ -9,11 +9,7 @@
     duration: number;
   }
 
-  let {
-    id,
-    start,
-    duration = $bindable(),
-  }: Props = $props();
+  let { id, start, duration = $bindable() }: Props = $props();
 
   let active = $state(false);
 
@@ -30,22 +26,26 @@
   });
 </script>
 
-<tr><td class="
-  flex items-center w-full p-2
-">
-  <button
-    onclick={() => active = !active}
-    class={[
-      "flex items-center gap-2 p-2",
-      "rounded-md",
-      !active ? "bg-green-600" : "bg-red-600",
-    ].join(' ')}
+<tr
+  ><td
+    class="
+  flex w-full items-center p-2
+"
   >
-    {#if !active}
-      Start
-    {:else}
-      <Spinner />
-      <span>Stop</span>
-    {/if}
-  </button>
-</td></tr>
+    <button
+      onclick={() => (active = !active)}
+      class={[
+        'flex items-center gap-2 p-2',
+        'rounded-md',
+        !active ? 'bg-green-600' : 'bg-red-600',
+      ].join(' ')}
+    >
+      {#if !active}
+        Start
+      {:else}
+        <Spinner />
+        <span>Stop</span>
+      {/if}
+    </button>
+  </td></tr
+>

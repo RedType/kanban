@@ -7,15 +7,18 @@ export const load: PageServerLoad = async ({ locals }) => {
   if (locals.user) {
     projects = await prisma.project.findMany({
       where: {
-        OR: [{
-          ownerId: locals.user.id,
-        }, {
-          members: {
-            some: {
-              userId: locals.user.id,
+        OR: [
+          {
+            ownerId: locals.user.id,
+          },
+          {
+            members: {
+              some: {
+                userId: locals.user.id,
+              },
             },
           },
-        }],
+        ],
       },
     });
   }

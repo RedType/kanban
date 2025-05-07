@@ -18,18 +18,20 @@
 
 <form method="POST" action="/auth?/logout" use:enhance={submit}>
   <div class="flex items-center">
-    <div class="
-      h-10 p-2 rounded-l-md
-      bg-slate-200 text-black
-    ">
+    <div
+      class="
+      h-10 rounded-l-md bg-slate-200
+      p-2 text-black
+    "
+    >
       {email}
     </div>
     <button
       type="submit"
       class="
-        h-10 p-2 rounded-r-md
-        bg-red-600 hover:bg-red-500
-        text-white font-bold
+        h-10 rounded-r-md bg-red-600
+        p-2 font-bold
+        text-white hover:bg-red-500
       "
     >
       {#if submitting}

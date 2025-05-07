@@ -1,4 +1,4 @@
-<div class="min-w-5 min-h-5">
+<div class="min-h-5 min-w-5">
   <svg
     version="1.1"
     viewBox="0 0 54.292 54.943"
@@ -19,11 +19,7 @@
         stroke-linejoin="bevel"
         stroke-width="5.5946"
       />
-      <path
-        d="m80 130v10l15-5"
-        stroke-linejoin="round"
-        stroke-width="4.565"
-      />
+      <path d="m80 130v10l15-5" stroke-linejoin="round" stroke-width="4.565" />
     </g>
   </svg>
 </div>

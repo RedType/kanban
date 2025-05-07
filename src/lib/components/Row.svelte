@@ -5,12 +5,14 @@
     children?: Snippet;
   }
 
-  const {
-    children,
-  }: Props = $props();
+  const { children }: Props = $props();
 </script>
 
-<tr><td class="
-">
-  {@render children?.()}
-</td></tr>
+<tr
+  ><td
+    class="
+"
+  >
+    {@render children?.()}
+  </td></tr
+>
