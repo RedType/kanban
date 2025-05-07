@@ -17,7 +17,7 @@
 >
   {#each Array(3) as _}
     <div class="
-      bg-black dark:bg-white w-full h-1 rounded-full
+      bg-white w-full h-1 rounded-full
     "></div>
   {/each}
 </button>

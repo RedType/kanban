@@ -1,8 +1,3 @@
-<script lang="ts">
-  import { getContext } from 'svelte';
-  const dark: () => boolean = getContext('dark');
-</script>
-
 <div class="min-w-5 min-h-5">
   <svg
     version="1.1"
@@ -14,7 +9,7 @@
       cy="3.6825"
       r="3"
       fill-opacity="0"
-      stroke={dark() ? "#fff" : "#000"}
+      stroke="#fff"
       stroke-linecap="round"
       stroke-linejoin="round"
       stroke-miterlimit="0"
@@ -23,7 +18,7 @@
     <path
       d="m6.6825 8.6825c4 0 6 3 6 7h-12c0-4 2-7 6-7z"
       fill-opacity="0"
-      stroke={dark() ? "#fff" : "#000"}
+      stroke="#fff"
       stroke-linecap="round"
       stroke-linejoin="round"
       stroke-miterlimit="0"

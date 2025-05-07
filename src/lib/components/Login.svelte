@@ -26,8 +26,8 @@
 <form method="POST" action="/auth?/login" use:enhance={submit}>
   <div class="flex items-center">
     <div class="
-      rounded-md p-1 h-8 z-10
-      dark:bg-slate-300 dark:text-black
+      rounded-l-md h-10 p-2
+      bg-slate-200 text-black
     ">
       <input
         type="email"
@@ -40,10 +40,9 @@
     <button
       type="submit"
       class="
-        relative p-1 pl-3 -left-2 rounded-r-md
-        dark:bg-slate-500 dark:text-white
-        dark:hover:bg-slate-700
-        font-bold
+        h-10 p-2 rounded-r-md
+        bg-green-600 hover:bg-green-500
+        text-white font-bold
       "
     >
       {#if submitting}

@@ -1,24 +1,42 @@
 <script lang="ts">
-  import { enhance } from '$app/forms';
+  import type { SubmitFunction } from '@sveltejs/kit';
+  import { applyAction, enhance } from '$app/forms';
+  import Spinner from './Spinner.svelte';
   let { email }: { email: string } = $props();
+
+  let submitting = $state(false);
+
+  const submit: SubmitFunction = () => {
+    submitting = true;
+
+    return async ({ result }) => {
+      submitting = false;
+      await applyAction(result);
+    };
+  };
 </script>
 
-<form method="POST" action="/auth?/logout" use:enhance>
-  <div class="flex">
+<form method="POST" action="/auth?/logout" use:enhance={submit}>
+  <div class="flex items-center">
     <div class="
-      rounded-md p-1 h-8 z-10
-      dark:bg-slate-300 dark:text-black
+      h-10 p-2 rounded-l-md
+      bg-slate-200 text-black
     ">
       {email}
     </div>
     <button
       type="submit"
       class="
-        relative p-1 pl-3 -left-2 rounded-r-md
-        dark:bg-fuchsia-800 dark:text-white
+        h-10 p-2 rounded-r-md
+        bg-red-600 hover:bg-red-500
+        text-white font-bold
       "
     >
-      Logout
+      {#if submitting}
+        <Spinner />
+      {:else}
+        Logout
+      {/if}
     </button>
   </div>
 </form>

@@ -1,8 +1,3 @@
-<script lang="ts">
-  import { getContext } from 'svelte';
-  const dark: () => boolean = getContext('dark');
-</script>
-
 <div class="min-w-5 min-h-5">
   <svg
     version="1.1"
@@ -11,7 +6,7 @@
   >
     <g
       fill-opacity="0"
-      stroke={dark() ? "#fff" : "#000"}
+      stroke="#fff"
       stroke-linecap="round"
       stroke-linejoin="round"
       stroke-miterlimit="0"
