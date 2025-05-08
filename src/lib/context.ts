@@ -7,22 +7,14 @@ export interface Context {
   sidebarOpen: boolean;
 }
 
-export const initContexts = (ctx: () => Context) => {
+export const initMainContext = (ctx: Context) => {
   setContext('mainContext', ctx);
 };
 
-export const getMainCtx = () => (getContext('mainContext') as () => Context)();
+export const mainCtx = () => getContext('mainContext') as Context;
 
-export const publishFloat = (message: string) => {
-  getMainCtx().floatMessage = message;
-  getMainCtx().floatOpen = true;
-};
-
-export const setActiveProject = (id: string) => {
-  getMainCtx().activeProject = id;
-};
-
-export const toggleSidebar = () => {
-  const ctx = getMainCtx();
-  ctx.sidebarOpen = !ctx.sidebarOpen;
+export const publishFloat = (msg: string) => {
+  const ctx = mainCtx();
+  ctx.floatMessage = msg;
+  ctx.floatOpen = true;
 };

@@ -1,6 +1,6 @@
 <script lang="ts">
   import '../app.css';
-  import { initContexts, toggleSidebar } from '$lib/context';
+  import { initMainContext } from '$lib/context';
   import {
     Floatification,
     Hamburger,
@@ -12,15 +12,20 @@
   } from '$com';
   import { ClockIcon, ProfileIcon, ProjectIcon, TaskIcon } from '$com/icons';
 
-  let { children, data } = $props();
-
+  // set up global context
   const mainContext = $state({
     activeProject: '',
     floatMessage: '',
     floatOpen: false,
     sidebarOpen: false,
   });
-  initContexts(() => mainContext);
+  initMainContext(mainContext);
+
+  const toggleSidebar = () => {
+    mainContext.sidebarOpen = !mainContext.sidebarOpen;
+  };
+
+  let { children, data } = $props();
 
   const projectUrl = $derived(`/project/${mainContext.activeProject}`);
   const timeUrl = $derived(`/project/${mainContext.activeProject}/time`);

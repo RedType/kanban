@@ -15,6 +15,7 @@ export const load: PageServerLoad = async ({ params, locals }) => {
       owner: {
         select: {
           id: true,
+          email: true,
         },
       },
       members: {
