@@ -1,56 +1,78 @@
 <script lang="ts">
   import '../app.css';
+  import { initContexts, toggleSidebar } from '$lib/context';
   import {
+    Floatification,
     Hamburger,
     Login,
     Logout,
     ProjectPicker,
     Sidebar,
     SquishButton,
-  } from '$/lib/components';
+  } from '$com';
   import {
     ClockIcon,
     ProfileIcon,
     ProjectIcon,
     TaskIcon,
-  } from '$/lib/components/icons';
+  } from '$com/icons';
 
   let { children, data } = $props();
 
-  let activeProject = $state('');
-  let sidebarOpen = $state(false);
+  const mainContext = $state({
+    activeProject: '',
+    floatMessage: '',
+    floatOpen: false,
+    sidebarOpen: false,
+  });
+  initContexts(() => mainContext);
 
-  const projectUrl = $derived(`/${activeProject}/`);
-  const timeUrl = $derived(`/${activeProject}/time`);
-  const kanbanUrl = $derived(`/${activeProject}/kanban`);
+  const projectUrl = $derived(`/project/${mainContext.activeProject}`);
+  const timeUrl = $derived(`/project/${mainContext.activeProject}/time`);
+  const kanbanUrl = $derived(`/project/${mainContext.activeProject}/kanban`);
   const profileUrl = $derived(`/profile/${data.user?.id}`);
 </script>
 
+<svelte:head>
+  <title>Redtype Kanban</title>
+</svelte:head>
+
+<Floatification
+  message={mainContext.floatMessage}
+  bind:open={mainContext.floatOpen}
+/>
+
 <header
   class="
-  flex w-screen content-evenly items-center
+  flex w-full content-evenly items-center
   justify-between p-4
   dark:bg-slate-600 dark:text-white
 "
 >
   <div class="flex items-center gap-3">
-    <Hamburger onclick={() => (sidebarOpen = !sidebarOpen)} />
+    <Hamburger onclick={toggleSidebar} />
     <h1 class="text-xl font-bold">Redtype Kanban</h1>
   </div>
 
   <div class="flex items-center gap-3">
-    <ProjectPicker projects={data.projects} bind:selected={activeProject} />
     {#if !data.user}
       <Login />
     {:else}
+      <ProjectPicker
+        projects={data.projects}
+        bind:selected={mainContext.activeProject}
+      />
       <Logout email={data.user?.email ?? 'You'} />
     {/if}
   </div>
 </header>
 
 <div class="absolute flex h-full w-full">
-  <Sidebar open={sidebarOpen} hide={!data.user || !activeProject}>
-    {#if data.user && activeProject}
+  <Sidebar
+    open={mainContext.sidebarOpen}
+    hide={!data.user || !mainContext.activeProject}
+  >
+    {#if data.user && mainContext.activeProject}
       <SquishButton href={projectUrl}>
         <ProjectIcon />
         Project

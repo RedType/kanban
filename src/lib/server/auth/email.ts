@@ -103,7 +103,7 @@ const html = (url: string): string =>
           <table border="0" cellspacing="0" cellpadding="0" width="100%">
             <tr>
               <td align="center" style="border-radius: 5px;">
-                <a href="${url}" target="_blank"
+                <a href="${url}" target="Redtype Kanban"
                    style="font-size: 18px; color: #fff; background-color: #00d;
                           font-family: Helvetica, Arial, sans-serif;
                           text-decoration: none; border-radius: 5px;

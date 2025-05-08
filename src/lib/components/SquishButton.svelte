@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { Snippet } from 'svelte';
+  import { page } from '$app/state';
 
   interface Props {
     children?: Snippet;
@@ -7,6 +8,8 @@
   }
 
   const { children, href }: Props = $props();
+
+  const active = $derived(page.url.pathname === href);
 </script>
 
 <a
@@ -14,8 +17,10 @@
   class={[
     'flex w-full items-center gap-2 truncate p-2',
     'font-bold text-white',
-    'bg-slate-600 hover:bg-slate-700',
-    'rounded-md',
+    'rounded-md border border-4 border-slate-600 hover:border-slate-400',
+    active
+      ? 'bg-slate-500 hover:bg-slate-400'
+      : 'bg-slate-600 hover:bg-slate-400',
   ].join(' ')}
 >
   {@render children?.()}

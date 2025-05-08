@@ -1,7 +1,7 @@
 <script lang="ts">
   interface Props {
     autoclose?: boolean | number;
-    message: string;
+    message?: string;
     open: boolean;
   }
 
@@ -28,13 +28,13 @@
 
 <div
   class="
-  absolute top-0 left-0 -z-100 flex
-  w-screen justify-center
-"
+    absolute top-0 left-0 -z-100 flex
+    w-screen justify-center
+  "
 >
   <div
     class={[
-      'relative z-100 m-2 min-w-100 rounded-md p-2',
+      'relative z-1000 m-2 min-w-100 rounded-md p-2',
       'flex items-center gap-2',
       'bg-yellow-500 text-black',
       'transition-all duration-500',
@@ -52,7 +52,7 @@
     >
       i
     </div>
-    <span>{message}</span>
+    <span>{message || ''}</span>
     <button
       onclick={() => (open = false)}
       class="absolute top-0 right-2 font-bold text-red-700"

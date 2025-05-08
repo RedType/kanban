@@ -1,10 +1,9 @@
 <script lang="ts">
   import type { SubmitFunction } from '@sveltejs/kit';
   import { applyAction, enhance } from '$app/forms';
-  import Floatification from './Floatification.svelte';
+  import { publishFloat } from '$/lib/context';
   import Spinner from './Spinner.svelte';
 
-  let openFloat = $state(false);
   let submitting = $state(false);
 
   const submit: SubmitFunction = () => {
@@ -12,17 +11,12 @@
 
     return async ({ result }) => {
       submitting = false;
-      openFloat = true;
+      publishFloat('Check your email for a login link');
       await applyAction(result);
     };
   };
 </script>
 
-<Floatification
-  message="Check your email for a login link"
-  bind:open={openFloat}
-  autoclose
-/>
 <form method="POST" action="/auth?/login" use:enhance={submit}>
   <div class="flex items-center">
     <div

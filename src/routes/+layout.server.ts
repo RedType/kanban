@@ -14,24 +14,22 @@ export const load: LayoutServerLoad = async (event) => {
   }
 
   let projects: Array<{ name: string; id: string }> = [];
-  projects = [
-    { id: '1', name: 'Project 1' },
-    { id: '2', name: 'Project 2' },
-    { id: '3', name: 'Project 3' },
-  ];
-  /*
+
   if (user) {
     projects = await prisma.project.findMany({
       where: {
-        OR: [{
-          ownerId: user.id,
-        }, {
-          members: {
-            some: {
-              userId: user.id,
+        OR: [
+          {
+            ownerId: user.id,
+          },
+          {
+            members: {
+              some: {
+                userId: user.id,
+              },
             },
           },
-        }],
+        ],
       },
       select: {
         id: true,
@@ -39,7 +37,6 @@ export const load: LayoutServerLoad = async (event) => {
       },
     });
   }
-  */
 
   return { projects, user };
 };
