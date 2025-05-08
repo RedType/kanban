@@ -35,17 +35,12 @@
   });
 </script>
 
-
-<form
-  method="POST"
-  use:enhance={submit}
-  class="flex flex-col gap-2"
->
-  <div class="flex gap-2 justify-center">
+<form method="POST" use:enhance={submit} class="flex flex-col gap-2">
+  <div class="flex justify-center gap-2">
     <h1 class="text-2xl font-bold">{data.project.name || 'Unnamed Project'}</h1>
     {#if owned}
       <button
-        onclick={() => editing = !editing}
+        onclick={() => (editing = !editing)}
         class={[
           'rounded-md p-2 text-white',
           'bg-green-600 hover:bg-green-500',
@@ -74,12 +69,10 @@
   {#if data.project.owner}
     <div class="ml-4">
       {data.project.owner.email}
-      <span class="text-red-500 font-bold">(Owner)</span>
+      <span class="font-bold text-red-500">(Owner)</span>
     </div>
   {:else}
-    <div class="text-red-500 font-bold">
-      Project has no owner
-    </div>
+    <div class="font-bold text-red-500">Project has no owner</div>
   {/if}
 
   {#each data.project.members as member (member.user.id)}
@@ -90,7 +83,7 @@
           type="submit"
           formAction="?/removeMember"
           class={[
-            'text-white font-bold p-2 rounded-md',
+            'rounded-md p-2 font-bold text-white',
             'bg-red-600 hover:bg-red-500',
           ].join(' ')}
         >

@@ -95,7 +95,7 @@ const html = (url: string): string =>
           style="padding: 10px 0px; font-size: 22px; 
                  font-family: Helvetica, Arial, sans-serif;"
         >
-          Sign in to <strong>Notes</strong>
+          Sign in to <strong>Redtype Kanban</strong>
         </td>
       </tr>
       <tr>
@@ -103,7 +103,7 @@ const html = (url: string): string =>
           <table border="0" cellspacing="0" cellpadding="0" width="100%">
             <tr>
               <td align="center" style="border-radius: 5px;">
-                <a href="${url}" target="Redtype Kanban"
+                <a href="${url}" target="_blank"
                    style="font-size: 18px; color: #fff; background-color: #00d;
                           font-family: Helvetica, Arial, sans-serif;
                           text-decoration: none; border-radius: 5px;
