@@ -17,13 +17,14 @@
     localStorage.setItem('activeProject', selected);
   });
 
-  const onchange = () => tick().then(() => {
-    if (selected) {
-      goto(`/project/${selected}`);
-    } else {
-      goto('/');
-    }
-  });
+  const onchange = () =>
+    tick().then(() => {
+      if (selected) {
+        goto(`/project/${selected}`);
+      } else {
+        goto('/');
+      }
+    });
 </script>
 
 <div class="flex">
@@ -47,7 +48,8 @@
     class="
     h-10 rounded-r-md bg-green-600 px-2 text-3xl font-bold
     text-white hover:bg-green-500
-  ">
+  "
+  >
     +
   </a>
 </div>

@@ -10,12 +10,7 @@
     Sidebar,
     SquishButton,
   } from '$com';
-  import {
-    ClockIcon,
-    ProfileIcon,
-    ProjectIcon,
-    TaskIcon,
-  } from '$com/icons';
+  import { ClockIcon, ProfileIcon, ProjectIcon, TaskIcon } from '$com/icons';
 
   let { children, data } = $props();
 
@@ -32,10 +27,6 @@
   const kanbanUrl = $derived(`/project/${mainContext.activeProject}/kanban`);
   const profileUrl = $derived(`/profile/${data.user?.id}`);
 </script>
-
-<svelte:head>
-  <title>Redtype Kanban</title>
-</svelte:head>
 
 <Floatification
   message={mainContext.floatMessage}

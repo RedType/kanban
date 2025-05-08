@@ -26,20 +26,20 @@
 <form
   method="POST"
   use:enhance={submit}
-  class="flex flex-col gap-2 place-items-start"
+  class="flex flex-col place-items-start gap-2"
 >
-  <div class="flex gap-2 items-center">
+  <div class="flex items-center gap-2">
     <label for="name">Name</label>
     <input
       type="text"
       name="name"
-      class="p-2 rounded-l-md bg-slate-200"
+      class="rounded-l-md bg-slate-200 p-2"
       disabled={submitting}
       required
     />
   </div>
 
-  <div class="flex gap-2 items-center">
+  <div class="flex items-center gap-2">
     <h2>Members</h2>
     <button
       onclick={() => members.push('')}
@@ -51,29 +51,25 @@
   </div>
 
   {#each members as _, i}
-    <div class="flex ml-4">
+    <div class="ml-4 flex">
       <input
         type="email"
         name="members"
         bind:value={members[i]}
         placeholder="email@example.com"
-        class="p-2 rounded-l-md bg-slate-200"
+        class="rounded-l-md bg-slate-200 p-2"
       />
       <button
         onclick={() => members.splice(i, 1)}
         disabled={submitting}
-        class="p-2 rounded-r-md text-white bg-red-600 hover:bg-red-500"
+        class="rounded-r-md bg-red-600 p-2 text-white hover:bg-red-500"
       >
         Remove
       </button>
     </div>
   {/each}
 
-  <button
-    type="submit"
-    disabled={submitting}
-    class={styles.greenButton}
-  >
+  <button type="submit" disabled={submitting} class={styles.greenButton}>
     Submit
   </button>
 </form>

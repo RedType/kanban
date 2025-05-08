@@ -11,9 +11,10 @@ export const actions: Actions = {
 
     const data = await request.formData();
     const name = data.get('name') as string;
-    const members = data.getAll('members')
-      .filter(email => !!email) // remove empty strings
-      .filter(email => email !== locals.user!.email) as Array<string>;
+    const members = data
+      .getAll('members')
+      .filter((email) => !!email) // remove empty strings
+      .filter((email) => email !== locals.user!.email) as Array<string>;
 
     const users = await prisma.user.findMany({
       where: {
