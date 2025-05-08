@@ -1,20 +1,13 @@
-import { getContext, setContext } from 'svelte';
+import { getContext } from 'svelte';
 
-export interface Context {
-  activeProject: string;
-  floatMessage: string;
-  floatOpen: boolean;
-  sidebarOpen: boolean;
-}
+export type ActiveProjectCtx = (project?: string) => string;
+export type PublishFloatCtx = (message: string) => void;
+export type SidebarCtx = (open?: boolean) => boolean;
 
-export const initMainContext = (ctx: Context) => {
-  setContext('mainContext', ctx);
-};
+export const getActiveProjectCtx = () =>
+  getContext('activeProjectCtx') as ActiveProjectCtx;
 
-export const mainCtx = () => getContext('mainContext') as Context;
+export const getPublishFloatCtx = () =>
+  getContext('publishFloatCtx') as PublishFloatCtx;
 
-export const publishFloat = (msg: string) => {
-  const ctx = mainCtx();
-  ctx.floatMessage = msg;
-  ctx.floatOpen = true;
-};
+export const getSidebarCtx = () => getContext('sidebarCtx') as SidebarCtx;

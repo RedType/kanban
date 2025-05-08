@@ -3,6 +3,5 @@ export { default as Hamburger } from './Hamburger.svelte';
 export { default as Login } from './Login.svelte';
 export { default as Logout } from './Logout.svelte';
 export { default as ProjectPicker } from './ProjectPicker.svelte';
-export { default as Row } from './Row.svelte';
 export { default as Sidebar } from './Sidebar.svelte';
 export { default as SquishButton } from './SquishButton.svelte';

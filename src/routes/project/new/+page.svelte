@@ -1,9 +1,11 @@
 <script lang="ts">
   import type { SubmitFunction } from '@sveltejs/kit';
   import { applyAction, enhance } from '$app/forms';
-  import { publishFloat } from '$/lib/context';
+  import { getPublishFloatCtx } from '$/lib/context';
   import styles from '$/lib/styles';
   import type { PageProps } from './$types';
+
+  const publishFloat = getPublishFloatCtx();
 
   const { form }: PageProps = $props();
 

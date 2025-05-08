@@ -1,10 +1,10 @@
 <script lang="ts">
   import type { SubmitFunction } from '@sveltejs/kit';
   import { applyAction, enhance } from '$app/forms';
-  import { mainCtx } from '$/lib/context';
+  import { getPublishFloatCtx } from '$/lib/context';
   import Spinner from './Spinner.svelte';
 
-  const ctx = mainCtx();
+  const publishFloat = getPublishFloatCtx();
 
   let submitting = $state(false);
 
@@ -13,8 +13,7 @@
 
     return async ({ result }) => {
       submitting = false;
-      ctx.floatMessage = 'Check your email for a login link';
-      ctx.floatOpen = true;
+      publishFloat('Check your email for a login link');
       await applyAction(result);
     };
   };

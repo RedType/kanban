@@ -1,11 +1,11 @@
 <script lang="ts">
   import type { SubmitFunction } from '@sveltejs/kit';
   import { applyAction, enhance } from '$app/forms';
-  import { mainCtx } from '$/lib/context';
+  import { getActiveProjectCtx } from '$/lib/context';
   import Spinner from './Spinner.svelte';
   let { email }: { email: string } = $props();
 
-  const ctx = mainCtx();
+  const activeProject = getActiveProjectCtx();
 
   let submitting = $state(false);
 
@@ -14,7 +14,7 @@
 
     return async ({ result }) => {
       submitting = false;
-      ctx.activeProject = '';
+      activeProject('');
       await applyAction(result);
     };
   };

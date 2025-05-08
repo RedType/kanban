@@ -1,6 +1,11 @@
 <script lang="ts">
   import '../app.css';
-  import { initMainContext } from '$lib/context';
+  import { setContext } from 'svelte';
+  import type {
+    ActiveProjectCtx,
+    PublishFloatCtx,
+    SidebarCtx,
+  } from '$lib/context';
   import {
     Floatification,
     Hamburger,
@@ -12,31 +17,43 @@
   } from '$com';
   import { ClockIcon, ProfileIcon, ProjectIcon, TaskIcon } from '$com/icons';
 
-  // set up global context
-  const mainContext = $state({
-    activeProject: '',
-    floatMessage: '',
-    floatOpen: false,
-    sidebarOpen: false,
-  });
-  initMainContext(mainContext);
+  // set up contexts
+  let floatMessage = $state('');
+  let floatOpen = $state(false);
+  let activeProject = $state('');
+  let sidebarOpen = $state(false);
 
-  const toggleSidebar = () => {
-    mainContext.sidebarOpen = !mainContext.sidebarOpen;
+  const publishFloatCtx: PublishFloatCtx = (message: string) => {
+    floatMessage = message;
+    floatOpen = true;
   };
+  setContext('publishFloatCtx', publishFloatCtx);
+
+  const activeProjectCtx: ActiveProjectCtx = (project) => {
+    if (project !== undefined) {
+      activeProject = project;
+    }
+    return activeProject;
+  };
+  setContext('activeProjectCtx', activeProjectCtx);
+
+  const sidebarCtx: SidebarCtx = (open) => {
+    if (open !== undefined) {
+      sidebarOpen = open;
+    }
+    return sidebarOpen;
+  };
+  setContext('sidebarCtx', sidebarCtx);
 
   let { children, data } = $props();
 
-  const projectUrl = $derived(`/project/${mainContext.activeProject}`);
-  const timeUrl = $derived(`/project/${mainContext.activeProject}/time`);
-  const kanbanUrl = $derived(`/project/${mainContext.activeProject}/kanban`);
+  const projectUrl = $derived(`/project/${activeProject}`);
+  const timeUrl = $derived(`/project/${activeProject}/time`);
+  const kanbanUrl = $derived(`/project/${activeProject}/kanban`);
   const profileUrl = $derived(`/profile/${data.user?.id}`);
 </script>
 
-<Floatification
-  message={mainContext.floatMessage}
-  bind:open={mainContext.floatOpen}
-/>
+<Floatification message={floatMessage} bind:open={floatOpen} />
 
 <header
   class="
@@ -46,7 +63,7 @@
 "
 >
   <div class="flex items-center gap-3">
-    <Hamburger onclick={toggleSidebar} />
+    <Hamburger onclick={() => (sidebarOpen = !sidebarOpen)} />
     <h1 class="text-xl font-bold">Redtype Kanban</h1>
   </div>
 
@@ -54,21 +71,15 @@
     {#if !data.user}
       <Login />
     {:else}
-      <ProjectPicker
-        projects={data.projects}
-        bind:selected={mainContext.activeProject}
-      />
+      <ProjectPicker projects={data.projects} bind:selected={activeProject} />
       <Logout email={data.user?.email ?? 'You'} />
     {/if}
   </div>
 </header>
 
 <div class="absolute flex h-full w-full">
-  <Sidebar
-    open={mainContext.sidebarOpen}
-    hide={!data.user || !mainContext.activeProject}
-  >
-    {#if data.user && mainContext.activeProject}
+  <Sidebar open={sidebarOpen} hide={!data.user || !activeProject}>
+    {#if data.user && activeProject}
       <SquishButton href={projectUrl}>
         <ProjectIcon />
         Project
