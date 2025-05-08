@@ -3,7 +3,7 @@ import { isString, Email } from '$/lib/util';
 import prisma from '$/lib/server/prisma';
 import type { Actions, PageServerLoad } from './$types';
 
-export const load: PageServerLoad = async ({ params, locals }) => {
+export const load: PageServerLoad = async ({ locals, params }) => {
   if (!locals.user) {
     return error(401, 'Please log in first');
   }
@@ -148,6 +148,6 @@ export const actions: Actions = {
       skipDuplicates: true,
     });
 
-    return new Response();
+    return { message: 'Success' };
   },
 };

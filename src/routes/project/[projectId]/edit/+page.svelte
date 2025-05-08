@@ -2,6 +2,7 @@
   import { Email } from '$/lib/util';
   import { getPublishFloatCtx } from '$/lib/context';
   import { applyAction, enhance } from '$app/forms';
+  import { invalidateAll } from '$app/navigation';
   import type { ActionData, PageData, SubmitFunction } from './$types';
 
   interface Props {
@@ -23,18 +24,27 @@
     submitting = true;
 
     for (const e of removedMemberEmails) {
-      formData.append('removedMemberEmails', e);
+      if (e) {
+        formData.append('removedMemberEmails', e);
+      }
     }
 
     return async ({ result }) => {
       submitting = false;
       await applyAction(result);
+      if (result.type === 'success') {
+        await invalidateAll();
+        // reset state
+        newMemberEmails.length = 0;
+        removedMemberEmails.length = 0;
+        removedMemberEmails.length = data.project.members.length;
+      }
       publishFloat(form?.message ?? '');
     };
   };
 </script>
 
-<form method="POST" use:enhance={submit}>
+<form method="POST" use:enhance={submit} class="flex flex-col gap-2">
   <div class="flex justify-center">
     <input
       type="text"
@@ -91,7 +101,7 @@
       </div>
     {/each}
 
-    {#each newMemberEmails as email, i}
+    {#each newMemberEmails as _, i}
       <div class="ml-4 flex items-center gap-2">
         <input
           type="email"
