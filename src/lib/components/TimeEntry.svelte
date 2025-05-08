@@ -13,7 +13,32 @@
 
   let active = $state(false);
 
-  let timer: number | null = $state(null);
+  const displayTime = $derived.by(() => {
+    const days = Math.floor(duration / (60 * 60 * 24))
+      .toLocaleString('en-US', {
+        minimumIntegerDigits: 2,
+        useGrouping: false,
+      });
+    const hours = Math.floor((duration / (60 * 60)) % 24)
+      .toLocaleString('en-US', {
+        minimumIntegerDigits: 2,
+        useGrouping: false,
+      });
+    const minutes = Math.floor((duration / 60) % 60)
+      .toLocaleString('en-US', {
+        minimumIntegerDigits: 2,
+        useGrouping: false,
+      });
+    const seconds = Math.floor(duration % 60)
+      .toLocaleString('en-US', {
+        minimumIntegerDigits: 2,
+        useGrouping: false,
+      });
+
+    return [days, hours, minutes, seconds].join(':');
+  });
+
+  let timer: number | null = null;
   $effect(() => {
     if (active && timer === null) {
       timer = setInterval(() => {
@@ -26,26 +51,26 @@
   });
 </script>
 
-<tr
-  ><td
-    class="
-  flex w-full items-center p-2
-"
+<div class="flex w-full items-center p-2 ">
+  <button
+    onclick={() => (active = !active)}
+    class={[
+      'flex items-center gap-2 p-2',
+      'rounded-md',
+      active
+        ? 'bg-red-600 hover:bg-red-500'
+        : 'bg-green-600 hover:bg-green-500',
+    ].join(' ')}
   >
-    <button
-      onclick={() => (active = !active)}
-      class={[
-        'flex items-center gap-2 p-2',
-        'rounded-md',
-        !active ? 'bg-green-600' : 'bg-red-600',
-      ].join(' ')}
-    >
-      {#if !active}
-        Start
-      {:else}
-        <Spinner />
-        <span>Stop</span>
-      {/if}
-    </button>
-  </td></tr
->
+    {#if !active}
+      Start =&gt;
+    {:else}
+      <Spinner />
+      <span>Stop</span>
+    {/if}
+  </button>
+
+  <div>
+    {displayTime}
+  </div>
+</div>
