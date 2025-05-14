@@ -47,10 +47,10 @@
 
   let { children, data } = $props();
 
-  const projectUrl = $derived(`/project/${activeProject}`);
-  const timeUrl = $derived(`/project/${activeProject}/time`);
-  const kanbanUrl = $derived(`/project/${activeProject}/kanban`);
+  const kanbanUrl = $derived(`/kanban/${activeProject}`);
   const profileUrl = $derived(`/profile/${data.user?.id}`);
+  const projectUrl = $derived(`/project/${activeProject}`);
+  const timeUrl = $derived(`/time/${activeProject}`);
 </script>
 
 <Floatification message={floatMessage} bind:open={floatOpen} />
