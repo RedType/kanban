@@ -68,7 +68,7 @@ export const sendLoginEmail = async (to: string): Promise<Response> => {
     body: JSON.stringify({
       from: AUTH_RESEND_FROM,
       to,
-      subject: 'Sign in to Notes',
+      subject: 'Sign in to Redtype Kanban',
       text: text(url),
       html: html(url),
     }),
