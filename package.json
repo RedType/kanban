@@ -13,6 +13,9 @@
     "format": "prettier --write . && prisma format",
     "lint": "prettier --check . && eslint ."
   },
+  "prisma": {
+    "schema": "./prisma"
+  },
   "devDependencies": {
     "@eslint/compat": "^1.2.5",
     "@eslint/js": "^9.18.0",
@@ -27,7 +30,7 @@
     "prettier": "^3.4.2",
     "prettier-plugin-svelte": "^3.3.3",
     "prettier-plugin-tailwindcss": "^0.6.11",
-    "prisma": "^6.7.0",
+    "prisma": "^6.8.2",
     "svelte": "^5.0.0",
     "svelte-check": "^4.0.0",
     "tailwindcss": "^4.0.0",
@@ -38,7 +41,7 @@
   "dependencies": {
     "@oslojs/crypto": "^1.0.1",
     "@oslojs/encoding": "^1.1.0",
-    "@prisma/client": "^6.7.0",
+    "@prisma/client": "^6.8.2",
     "zod": "^3.24.3"
   }
 }

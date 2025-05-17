@@ -1,82 +1,10 @@
-generator client {
-  provider        = "prisma-client-js"
-  previewFeatures = ["strictUndefinedChecks"]
-  output          = "../node_modules/@prisma-generated"
-}
-
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
-//////////////
-// Accounts //
-//////////////
-
-model User {
-  id            String    @id @default(cuid(2))
-  email         String    @unique
-  emailVerified DateTime?
-
-  sessions       Session[]
-  ownedProjects  Project[]
-  memberProjects UsersToProjects[]
-  timeEntries    TimeEntry[]
-}
-
-model Session {
-  id      String   @id
-  expires DateTime
-  userId  String
-  user    User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-}
-
-model VerificationToken {
-  email   String
-  token   String   @unique
-  expires DateTime
-
-  @@id([email, token])
-}
-
-//////////////
-// Projects //
-//////////////
-
-model Project {
-  id   String @id @default(cuid(2))
-  name String
-
-  ownerId String?
-  owner   User?   @relation(fields: [ownerId], references: [id], onDelete: SetNull)
-
-  members     UsersToProjects[]
-  timeEntries TimeEntry[]
-
-  created DateTime @default(now())
-}
-
-model UsersToProjects {
-  userId    String
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  projectId String
-  project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
-  created   DateTime @default(now())
-
-  @@id([userId, projectId])
-}
-
-////////////////
-// Time Clock //
-////////////////
-
-model TimeEntry {
-  id     String   @id @default(cuid(2))
-  start  DateTime @default(now())
-  length Int      @default(0) // seconds
-
-  projectId String
-  project   Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
-  userId    String?
-  user      User?   @relation(fields: [userId], references: [id], onDelete: SetNull)
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["strictUndefinedChecks"]
+  output          = "../node_modules/@prisma-generated"
 }

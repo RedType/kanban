@@ -1,0 +1,26 @@
+//////////////
+// Projects //
+//////////////
+
+model Project {
+  id   String @id @default(cuid(2))
+  name String
+
+  ownerId String?
+  owner   User?   @relation(fields: [ownerId], references: [id], onDelete: SetNull)
+
+  members     UsersToProjects[]
+  timeEntries TimeEntry[]
+
+  created DateTime @default(now())
+}
+
+model UsersToProjects {
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  projectId String
+  project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  created   DateTime @default(now())
+
+  @@id([userId, projectId])
+}
